@@ -36,7 +36,8 @@ export default function App() {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="UserLogin">
         <Drawer.Screen name="UserLogin" component={UserLogin} options={{
-          headerShown: false
+          headerShown: false,
+          swipeEnabled:false,
         }} />
       </Drawer.Navigator>
     </NavigationContainer>

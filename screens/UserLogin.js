@@ -1,16 +1,27 @@
 import { StatusBar } from "expo-status-bar";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { Image } from 'expo-image';
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { useState } from "react";
+import Notification from "../component/Notification";
+
 
 export default function UserLogin() {
 
+    const [getShowNotification, setShowNotification] = useState(false);
     const [getShow, setShow] = useState(false);
 
+
     const Applogo = require("../assets/images/app_logo.png");
+
+    function handleNotification() {
+        setShowNotification(true);
+        setTimeout(() => {
+            setShowNotification(false);
+        }, 3000);
+    };
 
     return (
         <SafeAreaView style={stylesheet.safeAreaView}>
@@ -25,17 +36,24 @@ export default function UserLogin() {
                         <View style={stylesheet.inputView}>
                             <TextInput style={stylesheet.input} placeholder={"Enter Your Username"} placeholderTextColor={"#d1d1cd"} />
                             <View style={stylesheet.passwordInputView}>
-                                <TextInput style={stylesheet.input} secureTextEntry={true} placeholder={"Enter Your Password"} placeholderTextColor={"#d1d1cd"} />
-                                <Pressable style={stylesheet.showPasswordPressable}>
+                                <TextInput style={stylesheet.input} secureTextEntry={getShow ? false : true} placeholder={"Enter Your Password"} placeholderTextColor={"#d1d1cd"} />
+                                <Pressable style={stylesheet.showPasswordPressable} onPress={() => {
+                                    setShow(!getShow);
+                                }}>
                                     <FontAwesome5 name={getShow ? "eye" : "eye-slash"} size={30} color={"#d1d1cd"} />
                                 </Pressable>
                             </View>
-                            <Pressable style={stylesheet.pressable}>
+                            <Pressable style={stylesheet.pressable} onPress={() => {
+                                handleNotification();
+                            }}>
                                 <Text style={stylesheet.pressableText}>Sgin In</Text>
                             </Pressable>
                         </View>
                     </View>
                     <Text style={stylesheet.text1}>2024@www.prithipura.org</Text>
+                    {
+                        getShowNotification && <Notification />
+                    }
                 </View>
             </ScrollView>
         </SafeAreaView>
