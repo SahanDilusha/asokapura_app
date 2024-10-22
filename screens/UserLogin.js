@@ -52,7 +52,7 @@ export default function UserLogin() {
                     </View>
                     <Text style={stylesheet.text1}>2024@www.prithipura.org</Text>
                     {
-                        getShowNotification && <Notification />
+                        getShowNotification && <Notification text={"Hello"} type={"Error"} />
                     }
                 </View>
             </ScrollView>
