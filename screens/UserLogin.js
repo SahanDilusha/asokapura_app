@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import { Image } from 'expo-image';
 import { SafeAreaView } from "react-native-safe-area-context";
