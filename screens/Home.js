@@ -1,17 +1,28 @@
 import { Image } from "expo-image";
 import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import ProductView from "./ProductView";
 
-export default function Home() {
+export default function Home({ navigation }) {
     const Applogo = require("../assets/images/app_logo.png");
     const Menulogo = require("../assets/images/menu-icon.png");
+    const img = require("../assets/images/download (1).jpeg");
+
+    const data = [
+        {},
+        {},
+        {},
+    ];
 
     return (
         <SafeAreaView style={stylesheet.safeAreaView}>
             <View style={stylesheet.viewTop}>
                 <View style={stylesheet.logoView}>
-                    <Pressable>
+                    <Pressable onPress={() => {
+                        navigation.openDrawer();
+                    }}>
                         <Image source={Menulogo} style={stylesheet.menuLogo} />
                     </Pressable>
                     <Image source={Applogo} style={stylesheet.appLogo} />
@@ -23,7 +34,16 @@ export default function Home() {
                     </Pressable>
                 </View>
             </View>
-            <View style={stylesheet.centerView}></View>
+            <View style={stylesheet.centerView}>
+
+                <FlashList
+                    data={data}
+                    renderItem={({ item }) => <ProductView item={{ color: "#e6b64e", img: img }} />}
+                    estimatedItemSize={200}
+                    contentContainerStyle={stylesheet.flashList}
+                    horizontal={true}
+                />
+            </View>
             <View style={stylesheet.botomView}>
                 <Text style={stylesheet.text1}>Total(Rs.)  25000.00</Text>
                 <View style={stylesheet.btnView}>
@@ -68,7 +88,7 @@ const stylesheet = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        gap: 20,
+        gap: 10,
     },
     inputView: {
         flexDirection: "row",
@@ -111,6 +131,10 @@ const stylesheet = StyleSheet.create({
     },
     centerView: {
         flex: 1,
+        padding: 10,
+        gap: 20,
+        flexDirection: "row",
+        justifyContent: "center",
     },
     text1: {
         fontFamily: "Roboto-Bold",
@@ -139,11 +163,14 @@ const stylesheet = StyleSheet.create({
         fontFamily: "Roboto-Bold",
         fontSize: 20,
     },
-    btnText2:{
-        fontSize:18,
+    btnText2: {
+        fontSize: 18,
         backgroundColor: "#ffbc2b",
-        padding:5,
-        borderRadius:10,
+        padding: 5,
+        borderRadius: 10,
         fontFamily: "Roboto-Bold",
-    }
+    },
+    flashList:{
+        gap:10,
+    },
 });
