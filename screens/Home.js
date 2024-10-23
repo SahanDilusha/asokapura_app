@@ -3,6 +3,8 @@ import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View 
 import { FlashList } from "@shopify/flash-list";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
 import ProductView from "./ProductView";
 import { BlurView } from 'expo-blur';
 import Animated, { FadeInRight, FadeOutLeft, FadeOutRight } from "react-native-reanimated";
@@ -65,7 +67,9 @@ export default function Home({ navigation }) {
                         <Text style={stylesheet.btnText}>Cart</Text>
                         <Text style={stylesheet.btnText2}>100</Text>
                     </Pressable>
-                    <Pressable style={[stylesheet.cashBtn, stylesheet.btn]}>
+                    <Pressable style={[stylesheet.cashBtn, stylesheet.btn]} onPress={() => {
+                        setShowCheckOut(!showCheckOut);
+                    }}>
                         <FontAwesome5 name="cash-register" size={30} color="black" />
                         <Text style={stylesheet.btnText}>Check Out</Text>
                     </Pressable>
@@ -74,23 +78,88 @@ export default function Home({ navigation }) {
 
             {
                 showCheckOut && <Animated.View entering={FadeInRight} exiting={FadeOutRight} style={stylesheet.checkOut}>
-                    <Pressable style={stylesheet.checkOut} onPress={() => {
-                        setShowCheckOut(!showCheckOut);
-                    }}>  </Pressable>
                     <BlurView tint={"dark"} style={stylesheet.checkOut}>
+                        <Pressable style={stylesheet.checkOutBtn} onPress={() => {
+                            setShowCheckOut(!showCheckOut);
+                        }}></Pressable>
                         <ScrollView contentContainerStyle={stylesheet.checkOutScrollView}>
+                            <View style={stylesheet.totalView}>
+                                <Text style={stylesheet.text2}>Total(Rs.)</Text>
+                                <Text style={stylesheet.text2}>00.00</Text>
+                            </View>
                             <View>
                                 <Pressable></Pressable>
                                 <Pressable></Pressable>
-                                <TextInput inputMode={"numeric"} style={stylesheet.inputCheckOut} placeholder={"00.00"} placeholderTextColor={"#949191"} />
+                                <TextInput inputMode={"numeric"} editable={true} style={stylesheet.inputCheckOut} placeholder={"00.00"} placeholderTextColor={"#949191"} />
+                            </View>
+                            <View style={stylesheet.totalView}>
+                                <Text style={stylesheet.text2}>Blance(Rs.)</Text>
+                                <Text style={stylesheet.text2}>00.00</Text>
+                            </View>
+                            <View style={stylesheet.numberPadView}>
+                                <View style={stylesheet.numberPadBtnView}>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>.</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>Clear</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <FontAwesome5 name="backspace" size={24} color="#ffffff" />
+                                    </Pressable>
+                                </View>
+                                <View style={stylesheet.numberPadBtnView}>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>1</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>2</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>3</Text>
+
+                                    </Pressable>
+                                </View>
+                                <View style={stylesheet.numberPadBtnView}>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>4</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>5</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>6</Text>
+                                    </Pressable>
+                                </View>
+                                <View style={stylesheet.numberPadBtnView}>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>7</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>8</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn}>
+                                        <Text style={stylesheet.numberPadBtnText}>9</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
+                            <View style={stylesheet.btnView}>
+                                <Pressable style={[stylesheet.cartBtn, stylesheet.btn]}>
+                                    <FontAwesome name="shopping-cart" size={30} color="black" />
+                                    <Text style={stylesheet.btnText}>Cart</Text>
+                                    <Text style={stylesheet.btnText2}>100</Text>
+                                </Pressable>
+                                <Pressable style={[stylesheet.cashBtn, stylesheet.btn]} onPress={() => {
+                                    setShowCheckOut(!showCheckOut);
+                                }}>
+                                    <MaterialCommunityIcons name="cash-fast" size={30} color="black" />
+                                    <Text style={stylesheet.btnText}>Pay</Text>
+                                </Pressable>
                             </View>
                         </ScrollView>
                     </BlurView>
-
                 </Animated.View>
             }
-
-
 
         </SafeAreaView>
     );
@@ -177,6 +246,7 @@ const stylesheet = StyleSheet.create({
     btnView: {
         flexDirection: "row",
         gap: 20,
+        justifyContent: "center",
     },
     btn: {
         width: 200,
@@ -205,17 +275,16 @@ const stylesheet = StyleSheet.create({
         fontFamily: "Roboto-Bold",
     },
     checkOutScrollView: {
-        width: "50%",
         height: "100%",
         backgroundColor: "#000",
-        alignSelf: "flex-end",
+        flex: 1,
         padding: 20,
     },
     checkOut: {
         position: "absolute",
         width: "100%",
         height: "100%",
-        flexDirection:"row",
+        flexDirection: "row",
     },
     inputCheckOut: {
         width: "100%",
@@ -226,6 +295,45 @@ const stylesheet = StyleSheet.create({
         textAlign: "right",
         fontSize: 25,
         paddingRight: 10,
+        color: "#ffffff",
+        fontFamily: "Roboto-Bold",
+    },
+    checkOutBtn: {
+        width: "50%",
+    },
+    totalView: {
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginTop: 20,
+    },
+    text2: {
+        fontSize: 20,
+        fontFamily: "Roboto-Bold",
+        color: "#ffffff",
+    },
+    numberPadView: {
+        width: "100%",
+        marginVertical: 20,
+        gap: 10,
+    },
+    numberPadBtnView: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        gap: 10,
+    },
+    numberPadBtn: {
+        flex: 1,
+        backgroundColor: "#b81706",
+        height: 60,
+        borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    numberPadBtnText: {
+        fontSize: 25,
         color: "#ffffff",
         fontFamily: "Roboto-Bold",
     },
