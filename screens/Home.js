@@ -1,11 +1,18 @@
 import { Image } from "expo-image";
-import { Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import ProductView from "./ProductView";
+import { BlurView } from 'expo-blur';
+import Animated, { FadeInRight, FadeOutLeft, FadeOutRight } from "react-native-reanimated";
+import { useState } from "react";
+
 
 export default function Home({ navigation }) {
+
+    const [showCheckOut, setShowCheckOut] = useState(true);
+
     const Applogo = require("../assets/images/app_logo.png");
     const Menulogo = require("../assets/images/menu-icon.png");
     const img = require("../assets/images/download (1).jpeg");
@@ -21,6 +28,7 @@ export default function Home({ navigation }) {
 
     return (
         <SafeAreaView style={stylesheet.safeAreaView}>
+
             <View style={stylesheet.viewTop}>
                 <View style={stylesheet.logoView}>
                     <Pressable onPress={() => {
@@ -31,7 +39,7 @@ export default function Home({ navigation }) {
                     <Image source={Applogo} style={stylesheet.appLogo} />
                 </View>
                 <View style={stylesheet.inputView}>
-                    <TextInput style={stylesheet.searchInput} placeholder={"Enter Product Name"} placeholderTextColor={""} />
+                    <TextInput style={stylesheet.searchInput} placeholder={"Enter Product Name"} placeholderTextColor={"#949191"} />
                     <Pressable style={stylesheet.searchPressable}>
                         <Text style={stylesheet.searchPressableText}>Search</Text>
                     </Pressable>
@@ -63,6 +71,27 @@ export default function Home({ navigation }) {
                     </Pressable>
                 </View>
             </View>
+
+            {
+                showCheckOut && <Animated.View entering={FadeInRight} exiting={FadeOutRight} style={stylesheet.checkOut}>
+                    <Pressable style={stylesheet.checkOut} onPress={() => {
+                        setShowCheckOut(!showCheckOut);
+                    }}>  </Pressable>
+                    <BlurView tint={"dark"} style={stylesheet.checkOut}>
+                        <ScrollView contentContainerStyle={stylesheet.checkOutScrollView}>
+                            <View>
+                                <Pressable></Pressable>
+                                <Pressable></Pressable>
+                                <TextInput inputMode={"numeric"} style={stylesheet.inputCheckOut} placeholder={"00.00"} placeholderTextColor={"#949191"} />
+                            </View>
+                        </ScrollView>
+                    </BlurView>
+
+                </Animated.View>
+            }
+
+
+
         </SafeAreaView>
     );
 }
@@ -173,6 +202,31 @@ const stylesheet = StyleSheet.create({
         backgroundColor: "#ffbc2b",
         padding: 5,
         borderRadius: 10,
+        fontFamily: "Roboto-Bold",
+    },
+    checkOutScrollView: {
+        width: "50%",
+        height: "100%",
+        backgroundColor: "#000",
+        alignSelf: "flex-end",
+        padding: 20,
+    },
+    checkOut: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        flexDirection:"row",
+    },
+    inputCheckOut: {
+        width: "100%",
+        height: 60,
+        borderBottomWidth: 2,
+        borderStyle: "solid",
+        borderColor: "#ffffff",
+        textAlign: "right",
+        fontSize: 25,
+        paddingRight: 10,
+        color: "#ffffff",
         fontFamily: "Roboto-Bold",
     },
 });
