@@ -14,6 +14,9 @@ export default function Home({ navigation }) {
         {},
         {},
         {},
+        {},
+        {},
+        {},
     ];
 
     return (
@@ -41,7 +44,9 @@ export default function Home({ navigation }) {
                     renderItem={({ item }) => <ProductView item={{ color: "#e6b64e", img: img }} />}
                     estimatedItemSize={200}
                     contentContainerStyle={stylesheet.flashList}
-                    horizontal={true}
+                    numColumns={3}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                 />
             </View>
             <View style={stylesheet.botomView}>
@@ -169,8 +174,5 @@ const stylesheet = StyleSheet.create({
         padding: 5,
         borderRadius: 10,
         fontFamily: "Roboto-Bold",
-    },
-    flashList:{
-        gap:10,
     },
 });

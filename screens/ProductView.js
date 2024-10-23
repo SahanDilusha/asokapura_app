@@ -38,6 +38,7 @@ const stylesheet = StyleSheet.create({
         padding: 5,
         alignItems: "center",
         gap: 10,
+        margin:10,
     },
     image: {
         width: 220,
@@ -87,11 +88,11 @@ const stylesheet = StyleSheet.create({
         gap: 30,
     },
     pressableView1: {
-
         position: "absolute",
         width: 60,
         height: 60,
         borderRadius:60,
+        opacity:.8,
     },
     pressableViewColor1:{
         backgroundColor: "#424242",
