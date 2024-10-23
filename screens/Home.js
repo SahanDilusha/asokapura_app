@@ -4,16 +4,15 @@ import { FlashList } from "@shopify/flash-list";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
 import ProductView from "./ProductView";
 import { BlurView } from 'expo-blur';
-import Animated, { FadeInRight, FadeOutLeft, FadeOutRight } from "react-native-reanimated";
+import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
 import { useState } from "react";
-
 
 export default function Home({ navigation }) {
 
-    const [showCheckOut, setShowCheckOut] = useState(true);
+    const [showCheckOut, setShowCheckOut] = useState(false);
+    const [input, setInput] = useState('');
 
     const Applogo = require("../assets/images/app_logo.png");
     const Menulogo = require("../assets/images/menu-icon.png");
@@ -90,7 +89,7 @@ export default function Home({ navigation }) {
                             <View>
                                 <Pressable></Pressable>
                                 <Pressable></Pressable>
-                                <TextInput inputMode={"numeric"} editable={true} style={stylesheet.inputCheckOut} placeholder={"00.00"} placeholderTextColor={"#949191"} />
+                                <TextInput value={input} inputMode={"numeric"} editable={false} style={stylesheet.inputCheckOut} placeholder={"00.00"} placeholderTextColor={"#949191"} />
                             </View>
                             <View style={stylesheet.totalView}>
                                 <Text style={stylesheet.text2}>Blance(Rs.)</Text>
@@ -98,48 +97,82 @@ export default function Home({ navigation }) {
                             </View>
                             <View style={stylesheet.numberPadView}>
                                 <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '.');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>.</Text>
                                     </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput('');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>Clear</Text>
                                     </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input.slice(0, -1));
+                                    }}>
                                         <FontAwesome5 name="backspace" size={24} color="#ffffff" />
                                     </Pressable>
                                 </View>
                                 <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '1');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>1</Text>
                                     </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '2');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>2</Text>
                                     </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '3');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>3</Text>
-
                                     </Pressable>
                                 </View>
                                 <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '4');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>4</Text>
                                     </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '5');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>5</Text>
                                     </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '6');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>6</Text>
                                     </Pressable>
                                 </View>
                                 <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '7');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>7</Text>
                                     </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '8');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>8</Text>
                                     </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn}>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput(input + '9');
+                                    }}>
                                         <Text style={stylesheet.numberPadBtnText}>9</Text>
+                                    </Pressable>
+                                </View>
+                                <View style={stylesheet.numberPadBtnView}>
+                                    <Pressable disabled={true} style={stylesheet.numberPadBtn2}>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
+                                        setInput('0');
+                                    }}>
+                                        <Text style={stylesheet.numberPadBtnText}>0</Text>
+                                    </Pressable>
+                                    <Pressable style={stylesheet.numberPadBtn2} disabled={true}>
                                     </Pressable>
                                 </View>
                             </View>
@@ -278,7 +311,8 @@ const stylesheet = StyleSheet.create({
         height: "100%",
         backgroundColor: "#000",
         flex: 1,
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
     },
     checkOut: {
         position: "absolute",
@@ -315,7 +349,7 @@ const stylesheet = StyleSheet.create({
     },
     numberPadView: {
         width: "100%",
-        marginVertical: 20,
+        marginVertical: 10,
         gap: 10,
     },
     numberPadBtnView: {
@@ -327,6 +361,14 @@ const stylesheet = StyleSheet.create({
     numberPadBtn: {
         flex: 1,
         backgroundColor: "#b81706",
+        height: 60,
+        borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    numberPadBtn2: {
+        flex: 1,
+        backgroundColor: "#000000",
         height: 60,
         borderRadius: 20,
         justifyContent: "center",
