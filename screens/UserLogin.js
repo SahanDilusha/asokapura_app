@@ -25,7 +25,6 @@ export default function UserLogin() {
 
     return (
         <SafeAreaView style={stylesheet.safeAreaView}>
-            <StatusBar style={"light"} hidden={true} />
             <ScrollView contentContainerStyle={stylesheet.scrollView} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                 <View style={stylesheet.container}>
                     <View style={stylesheet.haderView}>
