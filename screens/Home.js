@@ -8,6 +8,7 @@ import ProductView from "../component/ProductView";
 import { BlurView } from 'expo-blur';
 import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
 import { useState } from "react";
+import CartItem from "../component/CartItem";
 
 export default function Home({ navigation }) {
 
@@ -53,7 +54,6 @@ export default function Home({ navigation }) {
                     data={data}
                     renderItem={({ item }) => <ProductView item={{ color: "#e6b64e", img: img }} />}
                     estimatedItemSize={200}
-                    contentContainerStyle={stylesheet.flashList}
                     numColumns={3}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
@@ -79,7 +79,7 @@ export default function Home({ navigation }) {
             </View>
 
             {
-                showCheckOut && <Animated.View entering={FadeInRight} exiting={FadeOutRight} style={stylesheet.checkOut}>
+                showCheckOut && (<Animated.View entering={FadeInRight} exiting={FadeOutRight} style={stylesheet.checkOut}>
                     <BlurView tint={"dark"} style={stylesheet.checkOut}>
                         <Pressable style={stylesheet.checkOutBtn} onPress={() => {
                             setShowCheckOut(!showCheckOut);
@@ -197,7 +197,7 @@ export default function Home({ navigation }) {
                             </View>
                         </ScrollView>
                     </BlurView>
-                </Animated.View >
+                </Animated.View >)
             }
 
             {
@@ -214,11 +214,11 @@ export default function Home({ navigation }) {
                                 </Pressable>
                             </View>
                             <View style={stylesheet.cartItemBody}>
-
+                                <FlashList estimatedItemSize={200} data={data} renderItem={({ item }) => <CartItem/>} />
                             </View>
                             <Pressable style={[stylesheet.cashBtn, stylesheet.btn1]} onPress={() => {
-                               setShowCart(!showCart);
-                               setShowCheckOut(!showCheckOut);
+                                setShowCart(!showCart);
+                                setShowCheckOut(!showCheckOut);
                             }}>
                                 <MaterialCommunityIcons name="cash-fast" size={30} color="black" />
                                 <Text style={stylesheet.btnText}>Check Out</Text>
@@ -433,7 +433,7 @@ const stylesheet = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
-    cartItemBody:{
-        flex:1,
+    cartItemBody: {
+        flex: 1,
     },
 });
