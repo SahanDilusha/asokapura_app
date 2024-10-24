@@ -4,7 +4,7 @@ import { FlashList } from "@shopify/flash-list";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import ProductView from "./ProductView";
+import ProductView from "../component/ProductView";
 import { BlurView } from 'expo-blur';
 import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
 import { useState } from "react";
@@ -13,6 +13,7 @@ export default function Home({ navigation }) {
 
     const [showCheckOut, setShowCheckOut] = useState(false);
     const [input, setInput] = useState('');
+    const [showCart, setShowCart] = useState(true);
 
     const Applogo = require("../assets/images/app_logo.png");
     const Menulogo = require("../assets/images/menu-icon.png");
@@ -61,7 +62,9 @@ export default function Home({ navigation }) {
             <View style={stylesheet.botomView}>
                 <Text style={stylesheet.text1}>Total(Rs.)  25000.00</Text>
                 <View style={stylesheet.btnView}>
-                    <Pressable style={[stylesheet.cartBtn, stylesheet.btn]}>
+                    <Pressable style={[stylesheet.cartBtn, stylesheet.btn]} onPress={() => {
+                        setShowCart(!showCart);
+                    }}>
                         <FontAwesome name="shopping-cart" size={30} color="black" />
                         <Text style={stylesheet.btnText}>Cart</Text>
                         <Text style={stylesheet.btnText2}>100</Text>
@@ -191,7 +194,25 @@ export default function Home({ navigation }) {
                             </View>
                         </ScrollView>
                     </BlurView>
-                </Animated.View>
+                </Animated.View >
+            }
+
+            {
+                showCart && (<Animated.View entering={FadeInRight} exiting={FadeOutRight} style={stylesheet.checkOut}>
+                    <BlurView tint={"dark"} style={stylesheet.checkOut}>
+                        <Pressable style={stylesheet.checkOutBtn} onPress={() => {
+                            setShowCart(!showCart);
+                        }}></Pressable>
+                        <View style={stylesheet.checkOutScrollView}>
+                            <View style={stylesheet.cartView1}>
+                                <Text style={stylesheet.text2}>Total Items -100</Text>
+                                <Pressable style={stylesheet.cartBtn1}>
+                                    <Text style={stylesheet.text2}>Clear</Text>
+                                </Pressable>
+                            </View>
+                        </View>
+                    </BlurView>
+                </Animated.View>)
             }
 
         </SafeAreaView>
@@ -379,4 +400,15 @@ const stylesheet = StyleSheet.create({
         color: "#ffffff",
         fontFamily: "Roboto-Bold",
     },
+    cartView1: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    cartBtn1: {
+        backgroundColor: "red",
+        borderRadius: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+    }
 });
