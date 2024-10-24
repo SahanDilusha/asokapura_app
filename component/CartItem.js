@@ -3,10 +3,6 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 export default function CartItem({ item }) {
-
-    const img = require("../assets/images/download (1).jpeg");
-
-
     return (
         <View style={[stylesheet.container, { backgroundColor: item.color }]}>
             <Image source={item.img} style={stylesheet.image} />
@@ -25,7 +21,6 @@ export default function CartItem({ item }) {
                 </View>
                 <Text style={stylesheet.text2}>Total(Rs.) 3000.00</Text>
             </View>
-
             <View style={stylesheet.itemCount}>
                 <Text style={stylesheet.text1}>10</Text>
             </View>
