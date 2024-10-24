@@ -180,7 +180,10 @@ export default function Home({ navigation }) {
                                 </View>
                             </View>
                             <View style={stylesheet.btnView}>
-                                <Pressable style={[stylesheet.cartBtn, stylesheet.btn]}>
+                                <Pressable style={[stylesheet.cartBtn, stylesheet.btn]} onPress={() => {
+                                    setShowCheckOut(!showCheckOut);
+                                    setShowCart(!showCart);
+                                }}>
                                     <FontAwesome name="shopping-cart" size={30} color="black" />
                                     <Text style={stylesheet.btnText}>Cart</Text>
                                     <Text style={stylesheet.btnText2}>100</Text>
@@ -210,6 +213,16 @@ export default function Home({ navigation }) {
                                     <Text style={stylesheet.text2}>Clear</Text>
                                 </Pressable>
                             </View>
+                            <View style={stylesheet.cartItemBody}>
+
+                            </View>
+                            <Pressable style={[stylesheet.cashBtn, stylesheet.btn1]} onPress={() => {
+                               setShowCart(!showCart);
+                               setShowCheckOut(!showCheckOut);
+                            }}>
+                                <MaterialCommunityIcons name="cash-fast" size={30} color="black" />
+                                <Text style={stylesheet.btnText}>Check Out</Text>
+                            </Pressable>
                         </View>
                     </BlurView>
                 </Animated.View>)
@@ -304,6 +317,15 @@ const stylesheet = StyleSheet.create({
     },
     btn: {
         width: 200,
+        height: 50,
+        borderRadius: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+        gap: 20,
+    },
+    btn1: {
+        width: "100%",
         height: 50,
         borderRadius: 20,
         alignItems: "center",
@@ -410,5 +432,8 @@ const stylesheet = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 20,
         paddingVertical: 10,
-    }
+    },
+    cartItemBody:{
+        flex:1,
+    },
 });
