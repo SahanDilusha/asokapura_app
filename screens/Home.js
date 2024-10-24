@@ -214,7 +214,7 @@ export default function Home({ navigation }) {
                                 </Pressable>
                             </View>
                             <View style={stylesheet.cartItemBody}>
-                                <FlashList estimatedItemSize={200} data={data} renderItem={({ item }) => <CartItem/>} />
+                                <FlashList estimatedItemSize={200} data={data} renderItem={({ item }) => <CartItem item={{ color: "#e6b64e", img: img }} />} />
                             </View>
                             <Pressable style={[stylesheet.cashBtn, stylesheet.btn1]} onPress={() => {
                                 setShowCart(!showCart);
@@ -435,5 +435,7 @@ const stylesheet = StyleSheet.create({
     },
     cartItemBody: {
         flex: 1,
+        paddingVertical: 10,
     },
+
 });
