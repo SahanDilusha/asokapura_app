@@ -1,23 +1,22 @@
 import { Image } from "expo-image";
-import { Pressable, StyleSheet, TextInput } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-const Applogo = require("../assets/images/app_logo.png");
-const Menulogo = require("../assets/images/menu-icon.png");
-
-export default function Header() {
+export default function Nav({ menuOnPress, setText,onPressSearch,placeholder }) {
+    const Applogo = require("../assets/images/app_logo.png");
+    const Menulogo = require("../assets/images/menu-icon.png");
     return (
         <View style={stylesheet.viewTop}>
             <View style={stylesheet.logoView}>
-                <Pressable onPress={() => {
-                    navigation.openDrawer();
-                }}>
+                <Pressable onPress={menuOnPress}>
                     <Image source={Menulogo} style={stylesheet.menuLogo} />
                 </Pressable>
                 <Image source={Applogo} style={stylesheet.appLogo} />
             </View>
             <View style={stylesheet.inputView}>
-                <TextInput style={stylesheet.searchInput} placeholder={"Enter Product Name"} placeholderTextColor={"#949191"} />
-                <Pressable style={stylesheet.searchPressable}>
+                <TextInput style={stylesheet.searchInput} placeholder={placeholder} placeholderTextColor={"#949191"} onChangeText={(text) => {
+                    setText(text);
+                }} />
+                <Pressable style={stylesheet.searchPressable} onPress={onPressSearch}>
                     <Text style={stylesheet.searchPressableText}>Search</Text>
                 </Pressable>
             </View>
@@ -25,7 +24,7 @@ export default function Header() {
     );
 }
 
-const stylesheet =StyleSheet.create({
+const stylesheet = StyleSheet.create({
     viewTop: {
         height: 70,
         width: "100%",

@@ -1,6 +1,7 @@
 import { Image } from "expo-image";
-import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
+import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -9,13 +10,15 @@ import { BlurView } from 'expo-blur';
 import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
 import { useState } from "react";
 import CartItem from "../component/CartItem";
-import Header from "../component/Header";
+import Nav from "./Nav";
 
 export default function Home({ navigation }) {
 
     const [showCheckOut, setShowCheckOut] = useState(false);
     const [input, setInput] = useState('');
-    const [showCart, setShowCart] = useState(true);
+    const [showCart, setShowCart] = useState(false);
+    const [getText, setText] = useState('');
+
 
     const img = require("../assets/images/download (1).jpeg");
 
@@ -30,7 +33,12 @@ export default function Home({ navigation }) {
 
     return (
         <SafeAreaView style={stylesheet.safeAreaView}>
-            <Header />
+
+            <Nav setText={setText} menuOnPress={() => {
+                navigation.openDrawer();
+            }} onPressSearch={() => { console.log(getText) }} 
+            placeholder={"Enter Product Name"} />
+
             <View style={stylesheet.centerView}>
 
                 <FlashList
@@ -218,6 +226,60 @@ const stylesheet = StyleSheet.create({
     safeAreaView: {
         flex: 1,
         backgroundColor: "#171716",
+    },
+    viewTop: {
+        height: 70,
+        width: "100%",
+        backgroundColor: "#ffffff",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingHorizontal: 20,
+        gap: 20,
+    },
+    appLogo: {
+        width: 60,
+        height: 60,
+    },
+    menuLogo: {
+        width: 30,
+        height: 30,
+    },
+    logoView: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 10,
+    },
+    inputView: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 20,
+    },
+    searchInput: {
+        width: 400,
+        height: 50,
+        borderRadius: 20,
+        borderColor: "#000000",
+        borderWidth: 2,
+        paddingLeft: 20,
+        fontSize: 18,
+        fontFamily: "Roboto-Regular",
+    },
+    searchPressable: {
+        width: 120,
+        height: 50,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fccb42",
+        borderRadius: 20,
+        borderWidth: 1,
+        borderStyle: "solid",
+    },
+    searchPressableText: {
+        fontFamily: "Roboto-Bold",
+        fontSize: 20,
     },
     botomView: {
         flexDirection: "row",
