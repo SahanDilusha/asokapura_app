@@ -37,8 +37,8 @@ export default function Home({ navigation }) {
 
             <Nav setText={setText} menuOnPress={() => {
                 navigation.openDrawer();
-            }} onPressSearch={() => { console.log(getText) }} 
-            placeholder={"Enter Product Name"} />
+            }} onPressSearch={() => { console.log(getText) }}
+                placeholder={"Enter Product Name"} />
 
             <View style={stylesheet.centerView}>
 
@@ -90,7 +90,7 @@ export default function Home({ navigation }) {
                                 <Text style={stylesheet.text2}>Blance(Rs.)</Text>
                                 <Text style={stylesheet.text2}>00.00</Text>
                             </View>
-                          <NumberPad setInput={setInput}/>
+                            <NumberPad setInput={setInput} input={input} />
                             <View style={stylesheet.btnView}>
                                 <Pressable style={[stylesheet.cartBtn, stylesheet.btn]} onPress={() => {
                                     setShowCheckOut(!showCheckOut);

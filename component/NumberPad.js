@@ -2,7 +2,7 @@
 import { Pressable, StyleSheet, Text,  View } from "react-native";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
-export default function NumberPad({setInput}) {
+export default function NumberPad({setInput,input}) {
     return(
         <View style={stylesheet.numberPadView}>
         <View style={stylesheet.numberPadBtnView}>
