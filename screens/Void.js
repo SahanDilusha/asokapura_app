@@ -4,13 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Nav from '../component/Nav';
 import { FlashList } from '@shopify/flash-list';
-import Animated, { FadeInDown, FadeInUp, FadeOutDown } from 'react-native-reanimated';
+import Animated, { FadeInUp, FadeOutDown } from 'react-native-reanimated';
 import { BlurView } from 'expo-blur';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function Void({ navigation }) {
     const [getText, setText] = useState('');
-    const [showModel1, setShowModel1] = useState(true);
+    const [showModel1, setShowModel1] = useState(false);
 
     const data = [
         {},
@@ -99,7 +99,6 @@ export default function Void({ navigation }) {
                                     <Ionicons name="add" size={24} color="#ffffff" />
                                 </Pressable>
                                 <TextInput inputMode={"numeric"} placeholder="Enter quantity" style={stylesheet.modelInput} />
-
                                 <Pressable style={stylesheet.modelPressable}>
                                     <AntDesign name="minus" size={24} color="#ffffff" />
                                 </Pressable>
