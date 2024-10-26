@@ -1,4 +1,3 @@
-// App.js
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -49,27 +48,27 @@ export default function App() {
         }} />
         <Drawer.Screen name="Home" component={Home} options={{
           headerShown: false,
-          drawerIcon: () => { return <FontAwesome name="home" size={24} color="black" /> },
+          drawerIcon: ({ focused }) => { return <FontAwesome name={"home"} size={24} color={focused ? "#ffffff" : "#000000"} /> },
           drawerContentStyle: {
-            backgroundColor: "#000"
+            backgroundColor: "#000",
           },
           drawerItemStyle: {
             borderBottomStartRadius: 100,
-            borderTopStartRadius: 100
+            borderTopStartRadius: 100,
           },
           drawerActiveBackgroundColor: "#f77488",
           drawerInactiveBackgroundColor: "#ffffff",
-          drawerActiveTintColor: "#000",
+          drawerActiveTintColor: "#ffffff",
         }} />
         <Drawer.Screen name="Void" component={Void} options={{
           headerShown: false,
-          drawerIcon: () => { return <FontAwesome name="wpforms" size={24} color="black" /> },
+          drawerIcon: ({ focused }) => { return <FontAwesome name="wpforms" size={24} color={focused ? "#ffffff" : "#000000"} /> },
           drawerContentStyle: {
-            backgroundColor: "#000"
+            backgroundColor: "#000",
           },
           drawerItemStyle: {
             borderBottomStartRadius: 100,
-            borderTopStartRadius: 100
+            borderTopStartRadius: 100,
           },
           drawerActiveBackgroundColor: "#f77488",
           drawerInactiveBackgroundColor: "#ffffff",
