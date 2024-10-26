@@ -8,7 +8,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import UserLogin from './screens/UserLogin';
 import Home from './screens/Home';
 import { StatusBar } from 'expo-status-bar';
-import Nav from './screens/Nav';
+import Nav from './component/Nav';
+import Void from './screens/Void';
 
 const Drawer = createDrawerNavigator();
 SplashScreen.preventAutoHideAsync();
@@ -38,7 +39,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style={"light"} hidden={true} />
-      <Drawer.Navigator initialRouteName="Nav">
+      <Drawer.Navigator initialRouteName="Void">
         <Drawer.Screen name="UserLogin" component={UserLogin} options={{
           headerShown: false,
           swipeEnabled: false,
@@ -46,7 +47,7 @@ export default function App() {
         <Drawer.Screen name="Home" component={Home} options={{
           headerShown: false,
         }} />
-        <Drawer.Screen name="Nav" component={Nav} options={{
+        <Drawer.Screen name="Void" component={Void} options={{
           headerShown: false,
         }} />
       </Drawer.Navigator>

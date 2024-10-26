@@ -1,4 +1,4 @@
-import Nav from "./Nav";
+import Nav from "../component/Nav";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Void({ navigation }) {
@@ -6,10 +6,7 @@ export default function Void({ navigation }) {
 
     return (
         <SafeAreaView>
-            <Nav setText={setText} menuOnPress={() => {
-                navigation.openDrawer();
-            }} onPressSearch={() => { console.log(getText) }}
-                placeholder={"Enter Product Name"} />
+           
         </SafeAreaView>
     );
 }
