@@ -1,10 +1,27 @@
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import Nav from '../component/Nav';
+import { FlashList } from '@shopify/flash-list';
 
 export default function Void({ navigation }) {
     const [getText, setText] = useState('');
+
+    const data = [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+    ];
 
     return (
         <SafeAreaView style={stylesheet.safeAreaView}>
@@ -13,7 +30,7 @@ export default function Void({ navigation }) {
             }} onPressSearch={() => { console.log(getText) }}
                 placeholder={"Enter Product Name"} />
 
-            <ScrollView contentContainerStyle={stylesheet.scrollView} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+            <View style={stylesheet.scrollView} >
                 <View style={stylesheet.tableHeader}>
                     <View style={stylesheet.col}>
                         <Text style={stylesheet.colText}>Id</Text>
@@ -34,12 +51,33 @@ export default function Void({ navigation }) {
                         <Text style={stylesheet.colText}>Total(Rs.)</Text>
                     </View>
                 </View>
-                <View style={stylesheet.tableRow}>
-                    <View style={stylesheet.rowItem}>
 
+                <FlashList data={data} estimatedItemSize={200} renderItem={() => <Pressable style={stylesheet.tableRow} onLongPress={() => {
+                    Alert.alert("row");
+                }} delayLongPress={1000}>
+                    <View style={stylesheet.rowItem}>
+                        <Text style={stylesheet.colText}>P-493443990</Text>
                     </View>
-                </View>
-            </ScrollView>
+                    <View style={stylesheet.rowItem}>
+                        <Text style={stylesheet.colText} numberOfLines={1}>fdvdfv fvgfdvfgbv fdbv</Text>
+                    </View>
+                    <View style={stylesheet.rowItem}>
+                        <Text style={stylesheet.colText}>3000.00</Text>
+                    </View>
+                    <Pressable style={stylesheet.rowItem}>
+                        <Text style={stylesheet.colText}>1000 <Ionicons name="add-circle-sharp" size={20} color="#037ffc" /></Text>
+                    </Pressable>
+                    <Pressable style={stylesheet.rowItem}>
+                        <Text style={stylesheet.colText}>1000 <Ionicons name="add-circle-sharp" size={20} color="#037ffc" /></Text>
+                    </Pressable>
+                    <View style={stylesheet.rowItem}>
+                        <Text style={stylesheet.colText}>200000.00</Text>
+                    </View>
+                </Pressable>
+                } />
+
+
+            </View>
 
             <View style={stylesheet.botomView}>
 
@@ -71,16 +109,26 @@ const stylesheet = StyleSheet.create({
         flex: 1,
         backgroundColor: "#faedc8",
         padding: 5,
-        borderWidth: 2,
+        borderWidth: 1,
         borderStyle: "solid",
     },
     colText: {
         fontSize: 18,
         fontFamily: "Roboto-Bold",
+        textAlign: "center"
     },
-    rowItem:{
-        flex:1,
-        justifyContent:"center",
-        alignItems:"center",
+    tableRow: {
+        flexDirection: 'row',
+        height: 60,
+
+    },
+    rowItem: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingHorizontal: 5,
+        backgroundColor: "#f0f0f0",
+        height: "100%",
+        borderWidth: 1,
     },
 });
