@@ -11,6 +11,7 @@ import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
 import { useState } from "react";
 import CartItem from "../component/CartItem";
 import Nav from "../component/Nav";
+import NumberPad from "../component/NumberPad";
 
 export default function Home({ navigation }) {
 
@@ -89,87 +90,7 @@ export default function Home({ navigation }) {
                                 <Text style={stylesheet.text2}>Blance(Rs.)</Text>
                                 <Text style={stylesheet.text2}>00.00</Text>
                             </View>
-                            <View style={stylesheet.numberPadView}>
-                                <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '.');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>.</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput('');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>Clear</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input.slice(0, -1));
-                                    }}>
-                                        <FontAwesome5 name="backspace" size={24} color="#ffffff" />
-                                    </Pressable>
-                                </View>
-                                <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '1');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>1</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '2');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>2</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '3');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>3</Text>
-                                    </Pressable>
-                                </View>
-                                <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '4');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>4</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '5');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>5</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '6');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>6</Text>
-                                    </Pressable>
-                                </View>
-                                <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '7');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>7</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '8');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>8</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput(input + '9');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>9</Text>
-                                    </Pressable>
-                                </View>
-                                <View style={stylesheet.numberPadBtnView}>
-                                    <Pressable disabled={true} style={stylesheet.numberPadBtn2}>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn} onPress={() => {
-                                        setInput('0');
-                                    }}>
-                                        <Text style={stylesheet.numberPadBtnText}>0</Text>
-                                    </Pressable>
-                                    <Pressable style={stylesheet.numberPadBtn2} disabled={true}>
-                                    </Pressable>
-                                </View>
-                            </View>
+                          <NumberPad setInput={setInput}/>
                             <View style={stylesheet.btnView}>
                                 <Pressable style={[stylesheet.cartBtn, stylesheet.btn]} onPress={() => {
                                     setShowCheckOut(!showCheckOut);

@@ -8,7 +8,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import UserLogin from './screens/UserLogin';
 import Home from './screens/Home';
 import { StatusBar } from 'expo-status-bar';
-import Nav from './component/Nav';
 import Void from './screens/Void';
 
 const Drawer = createDrawerNavigator();
